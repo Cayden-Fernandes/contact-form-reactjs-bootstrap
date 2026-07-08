@@ -1,70 +1,214 @@
-# Getting Started with Create React App
+# React Contact Form with EmailJS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive contact form built with React, Bootstrap, and EmailJS. Messages are sent directly to your email without requiring a backend server.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Responsive design
+- React Hooks
+- Bootstrap 5 styling
+- EmailJS integration
+- No backend required
+- Easy to customize
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React
+- JavaScript (ES6)
+- Bootstrap 5
+- EmailJS
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Getting Started
 
-### `npm run build`
+## 1. Clone the Repository
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Open your terminal and run:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/your-username/your-repository-name.git
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Navigate into the project folder:
 
-### `npm run eject`
+```bash
+cd your-repository-name
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 2. Install Dependencies
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Install all required packages:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm install
+```
 
-## Learn More
+If needed, install Bootstrap:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install bootstrap
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Install EmailJS:
 
-### Code Splitting
+```bash
+npm install @emailjs/browser
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 3. Start the Application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Run:
 
-### Making a Progressive Web App
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The application will be available at:
 
-### Advanced Configuration
+```
+http://localhost:3000
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+# Configure EmailJS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+To receive emails, you'll need your own EmailJS account.
 
-### `npm run build` fails to minify
+## Step 1 — Create an EmailJS Account
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Visit:
+
+https://www.emailjs.com
+
+Sign up for a free account.
+
+---
+
+## Step 2 — Create an Email Service
+
+Create a new email service and copy your:
+
+- Service ID
+
+---
+
+## Step 3 — Create an Email Template
+
+Create an email template and copy your:
+
+- Template ID
+
+---
+
+## Step 4 — Get Your Public Key
+
+Copy your:
+
+- Public Key
+
+---
+
+# Add Your EmailJS Credentials
+
+Open:
+
+```text
+src/pages/Contact.js
+```
+
+Locate this section:
+
+```javascript
+const publicKey = "";
+const serviceID = "";
+const templateID = "";
+```
+
+Replace them with your own EmailJS credentials.
+
+Example:
+
+```javascript
+const publicKey = "public_xxxxxxxxx";
+const serviceID = "service_xxxxxxxxx";
+const templateID = "template_xxxxxxxxx";
+```
+
+---
+
+# How It Works
+
+When the user submits the form, React sends the form data using EmailJS:
+
+```javascript
+await emailjs.send(serviceID, templateID, formData);
+```
+
+The submitted data includes:
+
+- Name
+- Email
+- Message
+
+If the email is sent successfully:
+
+- The button changes to **Message Sent Successfully**
+- The form is cleared
+- The button resets after 3 seconds
+
+If an error occurs:
+
+- The button displays **Something went wrong**
+
+---
+
+# EmailJS Template Variables
+
+Your EmailJS template should contain these variables:
+
+```
+{{name}}
+
+{{email}}
+
+{{message}}
+```
+
+These correspond to the React state:
+
+```javascript
+const [formData, setFormData] = useState({
+  name: "",
+  email: "",
+  message: ""
+});
+```
+
+---
+
+# Project Structure
+
+```
+src/
+│
+├── pages/
+│   └── Contact.js
+│
+├── App.js
+│
+└── index.js
+```
+
+---
+
+# License
+
+This project is licensed under the MIT License.
